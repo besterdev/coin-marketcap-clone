@@ -3,6 +3,7 @@ import React from "react";
 import _ from "lodash";
 
 import Search from "../assets/svg/search";
+import { ConnectButton } from "web3uikit";
 
 const Header = () => {
   const menus = [
@@ -24,21 +25,26 @@ const Header = () => {
         width={220}
         height={220}
       />
-      <div className="flex justify-center h-full max-w-screen-xl mx-auto px-4">
+      <div className="flex justify-center h-full max-w-screen-xl px-4 mx-auto">
         <nav className="flex justify-center items-center gap-[20px]">
-          {_.map(menus, (menu) => (
-            <div className="relative mr-1 cursor-pointer hover:opacity-60">
+          {_.map(menus, (menu, index) => (
+            <div
+              className="relative mr-1 cursor-pointer hover:opacity-60"
+              key={`menu_${index}`}
+            >
               <div className="text-white flex mx-[10px]">{menu.title}</div>
-              <div className="rounded-full bg-blue-600 h-1 w-1 absolute bottom-5 right-0 top-1 ring-4" />
+              {menu.badge && (
+                <div className="absolute right-0 w-1 h-1 bg-blue-600 rounded-full bottom-5 top-1 ring-4" />
+              )}
             </div>
           ))}
         </nav>
         <div className="flex items-center">
-          {/* <ConnectButton /> */}
+          <ConnectButton />
           <div className="flex items-center justify-center p-2 rounded bg-[#171924]">
             <Search />
             <input
-              className="bg-transparent outline-none text-white w-70 ml-3"
+              className="ml-3 text-white bg-transparent outline-none w-70"
               placeholder="Search"
             />
           </div>
